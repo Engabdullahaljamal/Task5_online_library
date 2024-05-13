@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->role=='admin')
 <h1 style="color:rgb(0, 71, 251);text-align:center">Online Library Dashboard</h1>
 <div class="container">
     <div class="row justify-content-center">
@@ -126,4 +127,35 @@
     </div>
 
 </div>
+@else
+<h1 style="color:rgb(0, 71, 251);text-align:center"> Welcome To aur Online Library</h1>
+<table class="table mt-4" >
+    <thead >
+        <tr>
+            <th style="color: blue;" scope="col">#</th>
+            <th style="color: blue;" scope="col">BOOK NAME</th>
+            <th style="color: blue;" scope="col"> AUTHOR NAME</th>
+            <th style="color: blue;" scope="col"> CATEGORY NAME</th>
+            <th style="color: blue;" scope="col">SUPER CATEGORY NAME</th>
+            <th style="color: blue;" scope="col">RATE FROM 5</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($books as $book)
+        <tr>
+            <td style="color: blue;">{{$loop->iteration}}</td>
+            <td>{{$book->book_name}}</td>
+            <td>{{$book->book_author_name}}</td>
+            <td>{{$book->category->name}}</td>
+            <td>{{$book->category->super_category->name}}</td>
+            <td>{{$book->rate}} <br><a href="{{route('book.edit',$book->id)}}"> rate the book</a>          
+            </td> 
+        
+        </tr>
+
+        @endforeach
+    </tbody>
+</table>
+@endif
 @endsection

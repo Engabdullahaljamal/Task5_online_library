@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\book;
 use App\Models\category;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Type\Integer;
 
 class BookController extends Controller
 {
+    public Integer $i;
     /**
      * Display a listing of the resource.
      *
@@ -88,6 +90,7 @@ class BookController extends Controller
      */
     public function update(Request $request, book $book)
     {
+
 
         $request->validate([
             'book_name' => ['string'],

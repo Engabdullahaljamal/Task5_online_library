@@ -8,6 +8,7 @@
 </head>
 <body>
     {{-- --}}
+    @if(Auth::user()->role=='admin')
     <form action=" {{route('book.update',$book->id)}}" method="POST">
         @csrf
         @method('PUT')
@@ -31,6 +32,26 @@
             <option value="5">5</option>
 
             <input type="submit" value="update">
-    
+   
+        
+    @else
+    <form action=" {{route('book.update',$book->id)}}" method="POST">
+        @csrf
+        @method('PUT')
+        <input type="hidden" name="book_name" placeholder="book name" value={{$book->book_name}}>
+        <input type="hidden" name="book_author_name" placeholder="author name" . value={{$book->book_author_name}}>
+        <input type="hidden" name="category_id" value="{{$book->category->id}}" id="" type="hidden">
+        </input>
+        <select name="rate" id=""  >
+
+            <option>rate</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+
+            <input type="submit" value="update">  
+    @endif
 </body>
 </html>

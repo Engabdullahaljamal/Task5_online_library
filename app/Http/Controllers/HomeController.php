@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\book;
 use App\Models\category;
 use App\Models\super_category;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
