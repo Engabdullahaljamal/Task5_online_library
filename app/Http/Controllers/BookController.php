@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\book;
 use App\Models\category;
+use App\Models\super_category;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Integer;
 
@@ -19,7 +20,8 @@ class BookController extends Controller
     {
         $books = book::all();
         $categories = category::all();
-        return view('welcome', compact('books'), compact('categories'));
+        $super_categories = super_category::all();
+        return view('welcome', compact('books', 'categories', 'super_categories'));
     }
 
     /**

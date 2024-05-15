@@ -91,8 +91,9 @@ cursor: pointer;
            <form action="{{route('super_cat_book')}}" method="GET" class="mt-2">
             <label for="s_c_n" style="color: blue;">Chose Category : </label>
             <select name="super_cat_name" id="s_c_n" style="color: blue;" class="ml-2">
-                <option value="scince">scince</option>
-                <option value="literary"> literary</option>
+                @foreach ( $super_categories as $super_category)
+                <option value="{{$super_category->name}}">{{$super_category->name}}</option>
+                @endforeach 
             </select>
             <input type="submit" style="background-color:white;color:blue;border-radius: 10px;margin-right:140px;margin-left:10px" value="go">
            </form>

@@ -37,34 +37,37 @@ class HomeController extends Controller
 
     public function q_book(Request $request)
     {
+        $super_categories = super_category::all();
         $request->validate([
 
             'q' => ['string'],
         ]);
         $books = book::where('book_name', 'like', '%' . $request->q . '%')->get();
 
-        return view('welcome', compact('books'),);
+        return view('welcome', compact('books', 'super_categories'),);
     }
 
 
     public function super_cat_book(Request $request)
     {
+        $super_categories = super_category::all();
+        foreach ($super_categories as $super_category) {
+            if ($request->super_cat_name == $super_category->name) {
 
-        if ($request->super_cat_name == 'scince') {
+                $categories = category::where('super_category_id', $super_category->id)->get();
+                foreach ($categories as $category) {
 
-            $categories = category::where('super_category_id', 1)->get();
-            foreach ($categories as $category) {
+                    $books = book::where('category_id', $category->id)->get();
+                }
+            } else if ($request->super_cat_name == 'literary') {
 
-                $books = book::where('category_id', $category->id)->get();
+                $categories = category::where('super_category_id', 2)->get();
+                foreach ($categories as $category) {
+
+                    $books = book::where('category_id', $category->id)->get();
+                }
             }
-        } else if ($request->super_cat_name == 'literary') {
-
-            $categories = category::where('super_category_id', 2)->get();
-            foreach ($categories as $category) {
-
-                $books = book::where('category_id', $category->id)->get();
-            }
+            return  view('welcome', compact('books', 'super_categories'));
         }
-        return  view('welcome', compact('books'));
     }
 }
