@@ -79,6 +79,23 @@ cursor: pointer;
                     @endauth                   
                 </div>
             @endif
+
+            <div>
+                <form action="{{route('q.book')}}" method="GET">
+       <label style="color: blue" for="q">Search for Book : </label>
+                <input style="border-radius: 10px" type="text" name="q" id="q" class="ml-2">
+                <input style="background-color:white;color:blue;border-radius: 10px" type="submit" value="search">
+                </form>
+            </div>
+
+           <form action="{{route('super_cat_book')}}" method="GET" class="mt-2">
+            <label for="s_c_n" style="color: blue;">Chose Category : </label>
+            <select name="super_cat_name" id="s_c_n" style="color: blue;" class="ml-2">
+                <option value="scince">scince</option>
+                <option value="literary"> literary</option>
+            </select>
+            <input type="submit" style="background-color:white;color:blue;border-radius: 10px;margin-right:140px;margin-left:10px" value="go">
+           </form>
             <table class="table mt-4" >
                 <thead >
                     <tr>

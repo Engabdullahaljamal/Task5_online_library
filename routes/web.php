@@ -26,6 +26,8 @@ Route::get('/', [App\Http\Controllers\bookController::class, 'index']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('q-book', [App\Http\Controllers\HomeController::class, 'q_book'])->name('q.book');
+Route::get('super-cat-book', [App\Http\Controllers\HomeController::class, 'super_cat_book'])->name('super_cat_book');
 // Route::get('/create-book', [App\Http\Controllers\bookController::class, 'create'])->name('book.create');
 // Route::post('/store-book', [App\Http\Controllers\bookController::class, 'store'])->name('book.store');
 Route::resource('book', bookController::class);

@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('q_book', 'super_cat_book');
     }
 
     /**
@@ -33,5 +33,38 @@ class HomeController extends Controller
         $categories = category::all();
         $super_categories = super_category::all();
         return view('home', compact('books', 'categories', 'super_categories'),);
+    }
+
+    public function q_book(Request $request)
+    {
+        $request->validate([
+
+            'q' => ['string'],
+        ]);
+        $books = book::where('book_name', 'like', '%' . $request->q . '%')->get();
+
+        return view('welcome', compact('books'),);
+    }
+
+
+    public function super_cat_book(Request $request)
+    {
+
+        if ($request->super_cat_name == 'scince') {
+
+            $categories = category::where('super_category_id', 1)->get();
+            foreach ($categories as $category) {
+
+                $books = book::where('category_id', $category->id)->get();
+            }
+        } else if ($request->super_cat_name == 'literary') {
+
+            $categories = category::where('super_category_id', 2)->get();
+            foreach ($categories as $category) {
+
+                $books = book::where('category_id', $category->id)->get();
+            }
+        }
+        return  view('welcome', compact('books'));
     }
 }
